@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>指令修饰符</title>
+  <!--导入Vue包-->
+    <script src="../vue.js"></script>
+    <style>
+      .inner{
+        height: 150px;
+        background-color:hotpink;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="inner" @click.captrue="divMet" >
+        <input type="button" value="戳他" @clic.stop="inputMet">
+        <a href="http://www.baidu.com" @click.prevent.once="aMet">百度</a>
+      </div>
+    </div>
+
+    <script>
+      var va =new Vue({
+        el: '#app',
+        data:{ },
+        methods:{
+          divMet(){
+            console.log("这里触发了Div事件")
+          },
+          inputMet(){
+            console.log("这里触发了input事件")
+          },
+          aMet(){
+            console.log("这里触发了aLink事件")
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

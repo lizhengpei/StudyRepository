@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>v-for中key属性值的使用</title>
+    <!--导入Vue包-->
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <div>
+    <label>Id:
+      <input type="text" v-model="id">
+    </label>
+    <label>Name:
+      <input type="text" v-model="name">
+    </label>
+    <input type="button" value="添加" @click="add">
+  </div>
+  <p v-for="item in list" v-bind:key="item.id">
+    <input type="checkbox">
+    Id: {{item.id}} --- {{ item.name }}
+  </p>
+</div>
+<script>
+    var va = new Vue({
+        el: '#app',
+        data: {
+          id:'',
+          name:'',
+          list:[
+            {id:1,name:'李政培'},
+            {id:2,name:'何家辉'},
+            {id:3,name:'唐泽进'},
+            {id:4,name:'吴桂鑫'},
+            {id:5,name:'陈国泰'},
+          ]
+        },
+        methods: {
+          add(){
+            //把添加的追加到最前面
+            this.list.unshift({id:this.id,name:this.name})
+          }
+        }
+    });
+</script>
+</body>
+</html>

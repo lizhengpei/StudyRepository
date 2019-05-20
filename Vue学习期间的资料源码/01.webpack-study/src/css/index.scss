@@ -1,0 +1,35 @@
+html,body{
+  margin: 0;
+  padding: 0;
+}
+
+li{
+  font-size: 12px;
+  line-height: 30px;
+}
+
+.div{
+  height: 200px;
+  width: 270px;
+  background:  url("../images/告辞.jpg");
+  background-size: cover;
+}
+
+
+.div2{
+  height: 200px;
+  width: 200px;
+  background:  url("../images2/告辞.jpg");
+  background-size: cover;
+}
+
+span{
+  font-size: 50px;
+  color: green;
+}
+
+.div3{
+  height: 50px;
+  width: 100%;
+  background: deeppink;
+}

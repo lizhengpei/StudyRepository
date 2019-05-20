@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>第一个Vue网页</title>
+    <!--导入Vue包-->
+    <script src="../vue.js"></script>
+    <!-- 注意：vue-resource包是依赖于Vue的，所以先后顺序很重要-->
+    <script src="../vue-resource-1.3.4.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="button" value="发送Get请求"@click="getInfo">
+    <input type="button" value="发送Post请求"@click="postInfo">
+    <input type="button" value="发送JSONP请求"@click="jsonpInfo">
+    </div>
+
+    <script src="../jquery-1.12.4.js"></script>
+<script>
+//    Vue.http.options.root=''; 配置全局根路径
+    var vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {
+            getInfo(){  //发送get请求
+                //当发起get请求之后，通过 .then 来设置成功的回调函数
+                this.$http.get('tsconfig.json').then(function(result){
+                    //通过 result.body 拿到服务器返回成功的数据
+                    console.log(result.data);
+                    alert(result.data)
+                })
+            },
+            postInfo(){ //发送post请求    表单格式：application/x-wwww-form-urlencoded
+                //手动发起的post请求默认没有表单格式，所以有的服务器处理不了
+                //通过post的第三个参数 {emulateJSON:true} 设置提交的内容类型为普通表单数据格式
+                this.$http.post('04.生命周期函数的使用.html',{/*要传的参数*/},{emulateJSON:true}).then(function(result){
+                    console.log(result)
+                })
+            },
+            jsonpInfo(){    //发送JSONP请求
+                //JSONP请求与get请求相似
+                this.$http.jsonp('http://jsonplaceholder.typicode.com/users').then(function(result){
+                    console.log(result.data)
+                })
+            }
+        }
+    });
+</script>
+</body>
+</html>

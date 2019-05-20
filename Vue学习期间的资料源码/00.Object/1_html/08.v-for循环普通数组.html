@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-for循环普通数组</title>
+    <!--导入Vue包-->
+    <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="app">
+  <!--循环普通数组-->
+  <p v-for="(user1,i) in list">{{user1}}---索引：{{i}}</p>
+  <p v-for="(user2,j) in list2">编号：{{ user2.id }}---姓名：{{ user2.name }}---索引：{{j}}</p>
+  </div>
+
+<script>
+    var va = new Vue({
+        el: '#app',
+        data: {
+          //普通数组集合
+          list:[1,2,3,4,5,6],
+          list2:[
+            {id:1,name:'李政培'},
+            {id:2,name:'何家辉'},
+            {id:3,name:'方向'},
+            {id:4,name:'陈国泰'}
+          ]
+        },
+        methods: {}
+    });
+</script>
+</body>
+</html>

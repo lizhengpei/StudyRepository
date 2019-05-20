@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03.过滤器的基本使用</title>
+    <!--导入Vue包-->
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <p>{{ msg | msgFormat('疯狂'+233) | test }}</p>
+</div>
+
+<script>
+  //定义一个过滤器
+  Vue.filter('msgFormat',function(msg,arg,arg2){
+    return msg.replace(/单纯/g,arg,arg2)
+  })
+  Vue.filter('test',function(test){
+    return test+"233333333333333"
+  })
+
+
+    var va = new Vue({
+        el: '#app',
+        data: {
+          msg:'曾经，我也是一个单纯的少年，单纯的我，傻傻的问，谁是这个世界最单纯的男人'
+        },
+        methods: {}
+    });
+</script>
+</body>
+</html>

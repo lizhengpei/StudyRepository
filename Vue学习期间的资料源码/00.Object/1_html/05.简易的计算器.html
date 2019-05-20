@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>简易的计算器</title>
+    <!--导入Vue包-->
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <!--第一个数值-->
+  <input type="text" v-model="Num1" id="1">
+  <!--操作符号-->
+  <select v-model="opt">
+    <option id="+">+</option>
+    <option id="-">-</option>
+    <option id="*">*</option>
+    <option id="/">/</option>
+  </select>
+  <!--第二个数值-->
+  <input type="text" v-model="Num2" id="2">
+  <!--点击计算-->
+  <input type="button" value="=" @click="D">
+  <!--结果-->
+  <input type="text" v-model="result" id="3">
+</div>
+
+<script>
+    var va = new Vue({
+        el: '#app',
+        data: {
+          Num1: 0,
+          Num2: 0,
+          result: 0,
+          opt: '+'
+        },
+        methods: {
+          D(){ //算术方法
+//            switch (this.opt){
+//              case "+":
+//                this.result=parseInt(this.Num1)+parseInt(this.Num2);
+//                    break;
+//              case "-":
+//                this.result=parseInt(this.Num1)-parseInt(this.Num2);
+//                break;
+//              case "*":
+//                this.result=parseInt(this.Num1)*parseInt(this.Num2);
+//                break;
+//              case "/":
+//                this.result=parseInt(this.Num1)/parseInt(this.Num2);
+//                break;
+//            }
+            //投机取巧的方法，不适合多用
+            var C ='parseInt(this.Num1)'+ this.opt +'parseInt(this.Num2)'
+            this.result=eval(C);
+          }
+        }
+    });
+</script>
+</body>
+</html>

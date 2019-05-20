@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>第一个Vue网页</title>
+    <!--导入Vue包-->
+    <script src="../vue.js"></script>
+    <script src="../vue-resource-1.3.4.js"></script>
+    <link rel="stylesheet" href="../animate.css">
+</head>
+<body>
+<div id="app">
+    <!--通过点击按钮让h3显示，再点击让h3隐藏-->
+    <input type="button" @click="flag=!flag" value="Toggle">
+    <!--使用 transition 元素，把需要被控制的元素包裹起来；transition 元素是官方提供的-->
+    <!--<transition enter-active-class="animated flipInX" leave-active-class="animated flipOutX">-->
+        <!--<h3 v-if="flag">这是一个H3</h3>-->
+    <!--</transition>-->
+
+
+    <!-- 使用 :duration 来统一 入场 和 离场 时候的动画时长 -->
+    <transition enter-active-class="flipInX" leave-active-class="flipOutX" :duration="1000">
+        <h3 v-if="flag" class="animated">这是一个H3</h3>
+    </transition>
+
+    <!-- 使用 :duration="{enter:200,leave:800} 分别来设置 入场时长 和 离场时长-->
+    <transition enter-active-class="flipInX" leave-active-class="flipOutX" :duration="{enter:200,leave:800}">
+        <h3 v-if="flag" class="animated">这是一个H3</h3>
+    </transition>
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            flag:false
+        },
+        methods: {}
+    });
+</script>
+</body>
+</html>

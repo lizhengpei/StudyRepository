@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/node_modules/vue/dist/vue.js"></script>
+    <script src="/node_modules/axios/dist/axios.js"></script>
+    <script src="/node_modules/vue-resource/dist/vue-resource.js"></script>
+</head>
+<body>
+    <div id="app">
+        <span>{{ list.name }}</span>
+        <span>{{ list.age }}</span>
+    </div>
+
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                list:{}
+            },
+            created() {
+                this.get()
+            },
+            methods: {
+                 get(){
+                    // this.$http.get('/axios/test.json')
+                    //         .then(function (data,err) {  
+                    //             if(err) {
+                    //                 console.log(err)
+                    //             }  
+                    //             console.log(data)
+                    //             this.list = data.body
+                    //         })
+
+                    axios({
+                        headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Content-Type': 'application/json; charset=UTF-8',
+                        'Access-Control-Allow-Origin': '*'
+                        }, //设置跨域请求头
+                        method: "JSONP", //请求方式
+                        url: "http://192.168.137.224:10010/api/item/userInfo/login" //请求地址
+                        })
+                        .then( (respone) => {
+                            console.log(respone.data)
+                            this.list = respone.data
+                        })
+                        .catch( (err) => {
+                            console.log(err)
+                        })
+
+                 }
+            }
+        })
+    </script>
+
+</body>
+</html>

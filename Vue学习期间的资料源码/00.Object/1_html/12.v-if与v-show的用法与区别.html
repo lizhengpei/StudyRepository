@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:on-click="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>第一个Vue网页</title>
+    <!--导入Vue包-->
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <input type="button" value="toggle" @click="flag=!flag">
+
+  <h3 v-if="flag">这里是v-if的效果</h3>
+  <!--v-if有较高的切换性能消耗-->
+  <!--v-if的特点：每次都会重新删除或者创建元素-->
+  <!--如果元素涉及到频繁的切换，建议不要使用v-if-->
+  <h3 v-show="flag">这里是v-show的效果</h3>
+  <!--v-show有较高的初始渲染消耗-->
+  <!--v-show的特点：每次不会重新进行DOM的删除和创建，只是切换了元素的display：none样式-->
+  <!--如果元素可能永远都不会被显示出来被用户看到，建议不要使用v-show-->
+</div>
+
+<script>
+    var va = new Vue({
+        el: '#app',
+        data: {
+          flag:false
+        },
+        methods: {}
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+const fooIndex = require('./foo/')

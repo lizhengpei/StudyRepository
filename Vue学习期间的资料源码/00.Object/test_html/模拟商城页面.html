@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>模拟商城数据管理</title>
+    <!--导入Vue包-->
+    <script src="../vue.js"></script>
+    <link rel="stylesheet" href="../bootstrap-3.3.7.css">
+    <style>
+        #daohang li{
+            list-style: none;
+            width: 50px;
+            height: 250px;
+            position: fixed;
+            top: 50%;
+            margin-top: -126px;
+            right: 0;
+            border-radius: 5px 0 0 5px;
+            z-index: 999;
+        }
+        #ul1{
+            background-color: #c69c13;
+            color: white;
+        }
+        ul>li>a{
+            color: white;
+        }
+        #ul2>li>a{
+            color: white;
+        }
+        #footer ul li{
+            display: inline;
+            padding: 5px 10px 0 0;
+        }
+        #footer>ul>li>a{
+            color: white;
+        }
+        #footer{
+            background-color: #262626;
+        }
+        #footer p{
+            color: white;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+<div id="header">
+    <nav class="nav navbar-inverse navbar-fixed-top">
+        <ul class="nav nav-pills nav-justified" id="ul1">
+            <li><a href=""><img src="../images/cyllogo%20(2).png" alt=""></a></li>
+            <li><a href="" class="active">购物首页</a></li>
+            <li>
+                <a href="" class="dropdown open" data-toggle="dropdown">
+                    我的
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" style="background-color:#c69c13;">
+                    <li><a href="">已买到的宝贝</a></li>
+                    <li class="divider"></li>
+                    <li><a href="">足迹</a></li>
+                </ul>
+            </li>
+            <li><a href="">购物车</a></li>
+            <li>
+                <a href="" class="dropdown open" data-toggle="dropdown">
+                    收藏夹
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" style="background-color:#c69c13;">
+                    <li><a href="">收藏的宝贝</a></li>
+                    <li class="divider"></li>
+                    <li><a href="">收藏的店铺</a></li>
+                </ul>
+            </li>
+            <li><a href="">商品分类</a></li>
+            <li>
+                <a href="" class="dropdown open" data-toggle="dropdown">
+                    卖家中心
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" style="background-color:#c69c13;">
+                    <li><a href="">免费开店</a></li>
+                    <li class="divider"></li>
+                    <li><a href="">已卖出的宝贝</a></li>
+                    <li class="divider"></li>
+                    <li><a href="">出售中的宝贝</a></li>
+                    <li class="divider"></li>
+                    <li><a href="">卖家服务市场</a></li>
+                    <li class="divider"></li>
+                    <li><a href="">卖家培训中心</a></li>
+                    <li class="divider"></li>
+                    <li><a href="">体验中心</a></li>
+                    <li class="divider"></li>
+                    <li><a href="">问商友</a></li>
+                </ul>
+            </li>
+            <li><a href="">联系客服</a></li>
+            <li>
+                <a href="" class="dropdown open" data-toggle="dropdown">
+                    登陆&注册
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" style="background-color:#c69c13;" id="ul2">
+                    <li><a href="">登陆</a></li>
+                    <li class="divider"></li>
+                    <li><a href="">注册</a></li>
+                    <li class="divider"></li>
+                    <li><a href="">更多...</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>
+<div style="margin:70px;"></div>
+<div id="body">
+    <div class="panel panel-primary">
+        <div class="panel-heading" style="background-color: #4cae4c">
+            <h3 class="panel-title"><a name="retun">添加品牌</a></h3>
+        </div>
+        <div class="panel-body form-inline">
+            <label>
+                Id:
+                <input type="text" class="form-control" v-model="Mid" >
+            </label>
+            <label>
+                Name:
+                <input type="text" class="form-control" v-model="Mname" v-on:keyup.enter="Add">
+            </label>
+
+            <input type="button" value="添加" class="btn btn-primary"  v-on:click="Add()">
+
+            <label>
+                搜索名称关键字:
+                <input type="text" class="form-control" v-model="keywords" v-focus v-color="'pink'">
+            </label>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-hover table-striped">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Ctime</th>
+        <th>Operation</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr v-for="item in search(keywords)" :key="item.id">.
+        <td>{{ item.id }}</td>
+        <td>{{item.name}}</td>
+        <td>{{ item.ctime | dateFormat() }}</td>
+        <td>
+            <a href="" @click.prevent="del(item.id)">删除</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</div>
+
+<div id="app2">
+    <h3 v-color="'black'" v-fontweight="100" v-fontsize="20">{{ date | dateFormat }}</h3>
+</div>
+<footer id="footer" style="text-align: center">
+    <ul style="display: inline;flex-wrap: wrap;">
+        <li><a href="#">关于我们</a></li>
+        <li><a href="#">联系我们</a></li>
+        <li><a href="#">合作伙伴</a></li>
+        <li><a href="#">开放平台</a></li>
+        <li><a href="#">联系客服</a></li>
+        <li><a href="#">公司位置</a></li>
+        <li><a href="#">公司详情</a></li>
+    </ul>
+    <p>创意狼工作室 版权所有<br>
+    Coppyright  2018 CYL All Rights Reserved</p>
+</footer>
+<div>
+    <ul id="daohang">
+        <li><a href="" class="glyphicon glyphicon-chevron-up"></a></li>
+    </ul>
+</div>
+<script>
+
+    //定义一个时间的全局过滤器
+    Vue.filter('dateFormat',function(dateStr,pattern = ""){
+        //所谓全局过滤器，就是所有的vm实例都可以共享
+        var date=new Date(dateStr);
+
+        var y=date.getFullYear();
+        var m=date.getMonth()+1;
+        var d=date.getDate();
+
+//    return y+'-'+m+'-'+d   //可读性不高
+
+
+        if(pattern.toLowerCase() === "yyyy-mm-dd"){
+
+            return `${y}-${m}-${d}`
+
+        }else {
+
+            var hh=date.getHours();
+            var mm=date.getMinutes();
+            var ss=date.getSeconds();
+
+            return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+        }
+    });
+
+
+
+    //自定义全局指令
+    Vue.directive('focus',{
+        //使用 Vue.directive() 定义全局指令 v-focus
+        //其中：参数1：指令的名称，注意，在定义的时候，指令的前面，不需要加  v-
+        //但是在调用的时候，必须加上v-前缀来进行调用
+        //参数2是一个对象，这个对象身上，有一些指令相关的函数，这些函数可以在特定的阶段，执行相关的操作
+        bind:function(el){
+            //每当指令绑定到这个元素的时候，会立即执行这个bind函数，只执行一次
+            //注意每个元素的第一个参数永远都是el，表示被绑定了指令的那个元素，这个el参数，是一个原生JS对象
+            //在元素刚绑定了指令的时候，还没插入到DOM中去，这时候，调用focus方法不起作用
+            //因为一个元素只有插入DOM元素才可以获取焦点
+        },
+
+        inserted:function(el){
+            //inserted表示元素，插入到DOM中的时候，会执行inserted函数，执行一次
+            el.focus();
+            //和 JS 有关的行为操作，最好在 inserted 中去执行，放在 JS 不生效
+        },
+        //每当VNode更新的时候，会执行updated，可能会触发多次
+        updated:function(el){}
+
+    });
+
+    //自定义设置input里面字体颜色的  全局指令
+    Vue.directive('color',{
+        bind:function(el,binding){
+            //el.style.color='red';
+            el.style.color=binding.value;   //value  获取的是元素的值
+            console.log(binding.value);
+            console.log(binding.expression);//expression  获取到的是字符串
+
+
+        }
+    });
+
+    //vm实例1
+    var vm = new Vue({
+        el: '#body',
+        data: {
+            Mid:'',
+            Mname:'',
+            keywords:'',
+            list:[
+                {id:1, name:'奔驰', ctime:new Date()},
+                {id:2, name:'宝马', ctime:new Date()},
+                {id:3, name:'法拉利', ctime:new Date()},
+                {id:4, name:'兰博基尼', ctime:new Date()},
+                {id:5, name:'布加迪威龙', ctime:new Date()},
+                {id:6, name:'马丁', ctime:new Date()},
+                {id:7, name:'保时捷', ctime:new Date()},
+                {id:8, name:'路虎', ctime:new Date()},
+                {id:9, name:'别克', ctime:new Date()},
+                {id:10, name:'Jeep', ctime:new Date()}
+            ]
+        },
+        methods: {
+            Add(){//添加方法
+                //分析：
+                //1.获取到id和name，直接从date上获取
+                //2.创建出一个对象
+                //3.把这个对象，调用数组的相关方法，添加到date上的list中去
+
+                var car={id:this.Mid,name:this.Mname,ctime:new Date()};
+                if(this.Mid==0){
+                    alert("添加失败,请检查ID选项是否为空~");
+                }
+                else if (this.Mname==""){
+                    alert("添加失败,请检查Name选项是否为空~");
+                }else {
+                    this.list.push(car);
+                    this.Mid=this.Mname="";
+                }
+
+            },
+            del(id){//删除方法
+                //1.如何根据id获取到要删除这一项的索引
+                //2.如果找到了索引，直接调用数组的splice方法
+//            this.list.some((item,i)=>{
+//              if(item.id == id)
+//                this.list.splice(i,1)
+//                return true;
+//            })
+                var index = this.list.findIndex(function (item){
+                            if(item.id==id)
+                return true;
+            });
+                this.list.splice(index,1)
+            },
+            search(keywords){//搜索功能
+                <!-- 方法一：-->
+//            var newList = []
+//            this.list.forEach(item =>{
+//              if(item.name.indexOf(keywords) !=-1){
+//              newList.push(item)
+//            }
+//            })
+//            return newList;
+                <!-- 方法二：-->
+                return this.list.filter(item =>{
+                            if(item.name.includes(keywords)){
+                    return item;
+                }
+            })
+            }
+        }
+    });
+
+    //自定义全局按键修饰符
+    Vue.config.keyCodes.enter=13;
+
+    //vm实例2  如何定义一个私有的过滤器（局部）
+    var vm2=new Vue({
+        el:'#app2',
+        data:{
+            date:new Date(),
+            intervalId :null
+        },
+        methods:{},
+        //定义私有过滤器
+        filters:{
+            dateFormat :function(dateStr,pattern=""){
+                var date=new Date(dateStr);
+
+                var y=date.getFullYear();
+                //现在的日期得到的是一个数字，不是很符合现在的时间规范
+                //toString转为字符串然后使用padstart()添加字符
+                var m=(date.getMonth()+1).toString().padStart(2,'0');
+                var d=(date.getDate()).toString().padStart(2,'0');
+
+                //    return y+'-'+m+'-'+d   //可读性不高
+
+
+                if(pattern.toLowerCase() === "yyyy-mm-dd"){
+
+                    return `${y}-${m}-${d}`
+
+                }else {
+
+                    var hh=(date.getHours()).toString().padStart(2,'0');
+                    var mm=(date.getMinutes()).toString().padStart(2,'0');
+                    var ss=(date.getSeconds()).toString().padStart(2,'0');
+
+//                    this.intervalId=setInterval(function(){
+//                       var time= `${y}-${m}-${d} ${hh}:${mm}:${ss}`;
+//                    },400);
+                    return ` 当前时间：${y}-${m}-${d} ${hh}:${mm}:${ss}`
+
+                }
+            }
+        },
+        //定义私有指令
+        directives:{
+            'fontweight':{//设置字体粗细
+                bind:function(el,binding){
+                    el.style.fontWeight=binding.value;
+                }
+            },
+            //如果指令中只有bind，update属性，就可以缩写：如下
+            'fontsize':function(el,binding){//设置字体大小
+                el.style.fontSize=parseInt(binding.value)+'px';
+            }
+        }
+    })
+</script>
+<script src="../jquery-1.12.4.js"></script>
+<script src="../bootstrap.min.js"></script>
+</body>
+</html>

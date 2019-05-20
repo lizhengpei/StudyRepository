@@ -1,0 +1,1 @@
+window.alert('这是 index.js 文件！')

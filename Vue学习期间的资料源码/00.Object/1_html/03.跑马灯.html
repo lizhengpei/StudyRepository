@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+  <script src="../vue.js"></script>
+  <meta charset="UTF-8">
+  <title>走马灯效果</title>
+</head>
+<body>
+<div id="app">
+  <input type="button" value="浪起来" v-on:click="lang">
+  <input type="button" value="低调" v-on:click="stop">
+  <p>{{ msg }}</p>
+</div>
+<script>
+  var vm = new Vue({//创建对象
+    el:'#app',      //定义要控制区域
+    data:{          //数据存放
+      msg : '猥琐发育，别浪~~！',  //定义字符串
+      intervalId :null
+    },
+    methods:{
+      lang(){
+        //
+        var _this=this;
+        if (this.intervalId !=null) return;
+        this.intervalId= setInterval(function(){
+          //console.log(_this.msg)
+          var start=_this.msg.substring(0,1); //获取lang字符串的第一个字符串
+          var end=_this.msg.substring(1);     //截取lang字符串最后一个字符串
+          _this.msg = end + start
+        },400)
+      },
+      stop(){
+          clearInterval(this.intervalId);
+          this.intervalId=null
+
+      }
+    }
+  })
+
+</script>
+</body>
+</html>

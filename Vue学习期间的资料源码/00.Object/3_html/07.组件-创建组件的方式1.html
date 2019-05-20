@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>第一个Vue网页</title>
+    <!--导入Vue包-->
+    <script src="../vue.js"></script>
+    <script src="../vue-resource-1.3.4.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--如果要使用组件，直接把组件的名称，以HTML的形式，引入到页面中即可-->
+    <my-com1></my-com1>
+</div>
+
+<script>
+    //1.1 使用 Vue.extend 来创建全局的Vue组件
+
+//    var com1 = Vue.extend({
+//        //通过template属性指定了组件要展示的HTML结构
+//        template:'<h3>这是使用 Vue.extend 创建的组件</h3>'
+//    });
+
+    //1.2 使用 Vue.component('组件的名称',创建出来的模板对象);
+    //Vue.component('myCom1',com1);
+    /*如果在使用 Vue.component 定义全局组件的时候，组件名称使用了 驼峰命名 ，则在使用组件的时候，
+    *需要把大写的驼峰改为小写字母，同时，两个单词之间使用 - 连接；
+    */
+    //如果不使用驼峰命名，则直接拿名称来使用即可；
+
+//    Vue.component('myCom1',com1);
+
+//Vue.component 第一个参数：组件的名称，将来在引用组件的时候，就是一个标签形式来引入 它的
+    //第二个参数：Vue.extend 创建的组件，其中template就是组件将要展示的HTML内容
+    Vue.component('myCom1',Vue.extend({
+        template:'<h3>这是使用 Vue.extend 创建的组件</h3>'
+    }));
+
+
+
+
+    var vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {}
+    });
+</script>
+</body>
+</html>

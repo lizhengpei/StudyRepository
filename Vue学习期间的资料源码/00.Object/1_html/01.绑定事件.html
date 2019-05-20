@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <script src="../vue.js"></script>
+  <title>绑定事件</title>
+  <style>
+      [v-cloak]{
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <p v-cloak>{{ msg }}</p>
+    <h1 v-text="msg2"></h1>
+    <h1 v-html="msg3"></h1>
+    <input type="button" value="按钮" v-bind:title="mytitle">
+    <input type="button" value="按钮" v-on:mouseover="show">
+  </div>
+<script>
+  var va =new Vue({       //new出对象
+    el: '#app',           //定义区域元素
+    data:{                //data属性存贮数据
+      msg : '欢迎学习Vue',
+      msg2:'你是我的眼',
+      msg3:'<h1>带我领略四季的野</h1>',
+      mytitle:'这是一个按钮'
+    },
+    methods:{
+      show:function(){
+        alert('hello')
+      }
+    }
+  })
+</script>
+</body>
+</html>

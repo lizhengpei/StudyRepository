@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue的style样式使用</title>
+    <!--导入Vue包-->
+    <script src="../vue.js"></script>
+  <style>
+    .red{
+      color:red;
+    }
+    .thin{
+      font-weight: 200;
+    }
+    .italic{
+      font-style: italic;
+    }
+    .active{
+      letter-spacing: 0.5em;
+    }
+
+  </style>
+</head>
+<body>
+<div id="app">
+  <!--第一种：对象就是无序键值对的集合-->
+  <h1 :style="{color:'red','font-weight':200}">这里是h1呀！！！</h1>
+  <!---->
+  <h1 :style="classObj">这里是h1呀！！！</h1>
+  <!---->
+  <h1 :style="[classObj2,classObj]">这里是h1呀！！！</h1>
+</div>
+
+<script>
+    var va = new Vue({
+        el: '#app',
+        data: {
+          classObj:{color:'red','font-weight':200},
+          classObj2:{'font-weight':'italic'}
+        },
+        methods: {}
+    });
+</script>
+</body>
+</html>

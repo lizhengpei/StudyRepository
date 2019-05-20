@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>第一个Vue网页</title>
+    <!--导入Vue包-->
+    <script src="../vue.js"></script>
+    <script src="../vue-resource-1.3.4.js"></script>
+    <style>
+        #li{
+            border:dashed 1px gray;
+            padding: 5px;
+            padding-left: 10px;
+            list-style: none;
+            margin: 10px;
+            width: 100%;
+        }
+        #li:hover{
+            background-color: hotpink;
+            transition: all 0.8s ease;
+        }
+
+
+
+
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translateY(80px);
+        }
+
+        .v-enter-active,
+        .v-leave-active{
+            transition: all 0.3s ease;
+        }
+
+        /* 下面的 .v-move 和 .v-leave-active 配合使用，能够实现列表后续的元素渐渐地漂上来的效果 */
+        .v-move{
+            transition: all 0.3s ease;
+        }
+        .v-leave-active{
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <label>
+        Id：
+        <input type="text" v-model="id">
+
+        Name：
+        <input type="text" v-model="name">
+
+        <input type="button" value="添加" @click="add">
+    </label>
+<!--在实现列表过度的时候，如果需要过度的元素，是通过v-for循环渲染出来的，不能使用transition包裹，需要使用transition-group-->
+    <!--如果要为 v-for 循环创建的元素设置动画，必须为每一个元素设置 :key 属性-->
+    <!--给 transition-group 元素添加 appear 属性，实现页面刚出来的时候，入场时候的效果-->
+    <!--通过为 transition-group 元素，设置 tag 属性，指定 transition-group 渲染为指定元素，如果不指定 tag 属性
+    默认渲染为 span 标签-->
+    <transition-group appear tag="ul">
+        <li id="li" v-for="(item,i) in list" :key="item.id" @click="del(i)">
+            {{item.id}}---------{{item.name}}
+        </li>
+    </transition-group>
+
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            id:'',
+            name:'',
+            list:[
+                {id: 1,name:'李政培'},
+                {id: 2,name:'何家辉'},
+                {id: 3,name:'唐泽进'},
+                {id: 4,name:'方向'},
+                {id: 5,name:'陈国泰'}
+            ]
+        },
+        methods: {
+            add(){
+                this.list.push({ id:this.id,name:this.name });
+                this.id=this.name=''
+            },
+            del(i){
+                this.list.splice(i,1)
+            }
+        }
+    });
+</script>
+</body>
+</html>

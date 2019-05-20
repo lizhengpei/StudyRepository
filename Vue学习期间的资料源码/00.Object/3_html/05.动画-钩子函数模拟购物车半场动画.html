@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>第一个Vue网页</title>
+    <!--导入Vue包-->
+    <script src="../vue.js"></script>
+    <script src="../vue-resource-1.3.4.js"></script>
+    <style>
+        .ball{
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <input type="button" value="Run" @click="flag=!flag">
+    <!-- 1.使用 transition 元素包裹住要控制动画的元素 -->
+    <transition
+    @before-enter="beforeEnter"
+    @enter="enter"
+    @after-enter="afterEnter"
+    >
+    <div v-show="flag" class="ball"></div>
+    </transition>
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            flag:false
+        },
+        methods: {
+            //注意：动画钩子函数的第一个参数：el，表示 要执行动画的那个DOM元素，是个原生的JS DOM对象
+            //我们可以认为，el对象是通过document.getElementById('')方式获取的原生JS DOM对象
+            beforeEnter(el){
+            //beforeEnter 表示动画入场之前，此时，动画尚未开始，可以在beforeEnter中，设置元素开始动画之前的起始样式
+                //设置小球开始动画之前的起始位置
+                el.style.transform ='translate(0,0)'
+            },
+            enter(el,done){
+                //这句话没有实际的作用，但是如果不写，出不来动画效果
+                //可以认为 el.offsetWidth 会强制动画刷新
+                el.offsetWidth;
+            //enter表示动画开始之后的样式，这里，可以设置小球完成动画之后的结束状态
+                el.style.transform = 'translate(150px,450px)';
+                el.style.transition = 'all 1s ease';
+                done()
+            },
+            afterEnter(el){
+
+                this.flag=!this.flag
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>01.品牌列表案例</title>
+    <!--导入Vue包-->
+    <script src="../vue.js"></script>
+  <link rel="stylesheet" href="../bootstrap-3.3.7.css">
+</head>
+<body>
+<div id="app">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">添加品牌</h3>
+    </div>
+    <div class="panel-body form-inline">
+      <label>
+        Id:
+        <input type="text" class="form-control" v-model="Mid" autofocus="autofocus">
+      </label>
+      <label>
+        Name:
+        <input type="text" class="form-control" v-model="Mname">
+      </label>
+
+        <input type="button" value="添加" class="btn btn-primary"  v-on:click="Add">
+
+      <label>
+        搜索名称关键字:
+        <input type="text" class="form-control" v-model="keywords">
+      </label>
+
+    </div>
+  </div>
+
+  <table class="table table-bordered table-hover table-striped">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Ctime</th>
+        <th>Operation</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr v-for="item in search(keywords)" :key="item.id">.
+      <td>{{ item.id }}</td>
+      <td>{{item.name}}</td>
+      <td>{{ item.ctime }}</td>
+      <td>
+        <a href="" @click.prevent="del(item.id)">删除</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <h3>{{ list.ctime }}</h3>
+</div>
+
+<script>
+    var va = new Vue({
+        el: '#app',
+        data: {
+          Mid:'',
+          Mname:'',
+          keywords:'',
+          list:[
+            {id:1, name:'奔驰', ctime:new Date()},
+            {id:2, name:'宝马', ctime:new Date()}
+          ]
+        },
+        methods: {
+          Add(){//添加方法
+            //分析：
+            //1.获取到id和name，直接从date上获取
+            //2.创建出一个对象
+            //3.把这个对象，调用数组的相关方法，添加到date上的list中去
+
+            var car={id:this.Mid,name:this.Mname,ctime:new Date()}
+            if(this.Mid==0){
+              alert("添加失败,请检查ID选项是否为空~")
+            }
+            else if (this.Mname==""){
+              alert("添加失败,请检查Name选项是否为空~")
+            }else {
+              this.list.push(car);
+              this.Mid=this.Mname="";
+            }
+
+          },
+          del(id){//删除方法
+            //1.如何根据id获取到要删除这一项的索引
+            //2.如果找到了索引，直接调用数组的splice方法
+//            this.list.some((item,i)=>{
+//              if(item.id == id)
+//                this.list.splice(i,1)
+//                return true;
+//            })
+            var index = this.list.findIndex(item =>{
+                if(item.id==id)
+                  return true;
+              })
+            this.list.splice(index,1)
+          },
+          search(keywords){//搜索功能
+            <!-- 方法一：-->
+//            var newList = []
+//            this.list.forEach(item =>{
+//              if(item.name.indexOf(keywords) !=-1){
+//              newList.push(item)
+//            }
+//            })
+//            return newList;
+            <!-- 方法二：-->
+            return this.list.filter(item =>{
+              if(item.name.includes(keywords)){
+                return item;
+              }
+            })
+          }
+        }
+    });
+</script>
+</body>
+</html>

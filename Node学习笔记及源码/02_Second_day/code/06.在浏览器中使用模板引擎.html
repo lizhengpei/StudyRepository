@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="node_modules/art-template/lib/template-web.js"></script>
+    <script type="text/template" id="tpl">
+        姓名 {{ name }}
+        来自 {{ from }}
+        年龄 {{ age }}
+        爱好 {{each hobbies}} {{ $value }} {{/each}}
+    </script>
+    <script>
+        var ret = template('tpl',{
+            name:'Jack',
+            age: 18,
+            from : '湖南',
+            hobbies: [
+                '打球',
+                '听歌',
+                '打代码'
+            ]
+        })
+        console.log(ret)
+    </script>
+</body>
+</html>

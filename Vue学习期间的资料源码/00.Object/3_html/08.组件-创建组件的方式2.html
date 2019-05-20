@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>第一个Vue网页</title>
+    <!--导入Vue包-->
+    <script src="../vue.js"></script>
+    <script src="../vue-resource-1.3.4.js"></script>
+</head>
+<body>
+<div id="app">
+<div>
+    <h3>这是直接使用 Vue.component 创建出来的组件</h3>
+    <span>123</span>
+</div>
+</div>
+
+<script>
+    //注意：不论是哪种方式创建出来的组件，组件的template属性指向的模板内容，必须只有唯一一个根元素
+    Vue.component('myCom2',{
+        template:'<div><h3>这是直接使用 Vue.component 创建出来的组件</h3><span>123</span></div>'
+    });
+    var vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {}
+    });
+</script>
+</body>
+</html>

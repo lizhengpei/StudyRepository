@@ -1,0 +1,21 @@
+{
+    "status":0,
+    "message":[
+        {
+            "typeName":"家居生活",
+            "typeId":2
+        },
+        {
+            "typeName":"摄影设计",
+            "typeId":3
+        },
+        {
+            "typeName":"明星美女",
+            "typeId":4
+        },
+        {
+            "typeName":"空间设计",
+            "typeId":5
+        }
+    ]
+}

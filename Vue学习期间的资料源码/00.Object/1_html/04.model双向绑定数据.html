@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>model双向绑定数据</title>
+    <!--导入Vue包-->
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <h1>{{ msg }}</h1>
+  <input type="text" v-model="msg" style=width:100%>
+</div>
+
+<script>
+    var va = new Vue({
+        el: '#app',
+        data: {
+          msg:'大家都是好学生，爱敲代码的好学生'
+        },
+        methods: {}
+    });
+</script>
+</body>
+</html>
