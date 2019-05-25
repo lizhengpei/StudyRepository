@@ -5,6 +5,7 @@ npm-debug.log*
 
 # Editor directories and files
 .idea·
+.gitignore
 .vscode
 *.suo
 *.ntvs*
