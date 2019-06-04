@@ -18,5 +18,5 @@ appServer.use(router)
 // router(appServer)
 
 appServer.listen(3000, function () {
-    console.log('The appServer is running...');
+    console.log('The appServer is running at port 3000...');
 })
